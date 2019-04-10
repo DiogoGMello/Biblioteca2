@@ -1,13 +1,15 @@
 package model.bean;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Emprestimo {
     private int idEmprestimo;
-    private int clienteID;
-    private int exemplarID;
+    private Cliente cliente;
+    private Exemplar exemplar;
     private Date dataEmprestimo;
-    private Date dataDevPrevista;
     private Date dataDevEfetiva;
     private int funcionarioID;
     private boolean statusEmprestimo;
@@ -23,36 +25,32 @@ public class Emprestimo {
         this.idEmprestimo = idEmprestimo;
     }
 
-    public int getClienteID() {
-        return clienteID;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteID(int clienteID) {
-        this.clienteID = clienteID;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public int getExemplarID() {
-        return exemplarID;
+    public Exemplar getExemplar() {
+        return exemplar;
     }
 
-    public void setExemplarID(int exemplarID) {
-        this.exemplarID = exemplarID;
+    public void setExemplar(Exemplar exemplar) {
+        this.exemplar = exemplar;
     }
 
     public Date getDataEmprestimo() {
-        return dataEmprestimo;
+        Date date = new Date();
+        date.getTime();
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
+        formatDate.format(date);
+        return date;
     }
 
     public void setDataEmprestimo(Date dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
-    }
-
-    public Date getDataDevPrevista() {
-        return dataDevPrevista;
-    }
-
-    public void setDataDevPrevista(Date dataDevPrevista) {
-        this.dataDevPrevista = dataDevPrevista;
     }
 
     public Date getDataDevEfetiva() {
@@ -77,5 +75,12 @@ public class Emprestimo {
 
     public void setStatusEmprestimo(boolean statusEmprestimo) {
         this.statusEmprestimo = statusEmprestimo;
+    }
+
+    public Date geraDataPrevista(){
+        Calendar c = Calendar.getInstance();
+        c.setTime(dataEmprestimo);
+        c.add(Calendar.DATE, +7);
+        return c.getTime();
     }
 }
