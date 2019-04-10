@@ -42,4 +42,5 @@ public class Funcionario {
     public void setDataTerminoContrato(Date dataTerminoContrato) {
         this.dataTerminoContrato = dataTerminoContrato;
     }
+
 }
